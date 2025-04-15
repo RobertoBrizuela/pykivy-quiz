@@ -1,0 +1,79 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<CustomButton@Button>:
+    font_size: '20sp'
+    background_normal: ''
+    background_color: 0.2, 0.6, 0.86, 1   # Color azul
+    color: 1, 1, 1, 1                     # Texto blanco
+    size_hint_y: None
+    height: '50dp'
+    # Agrega una sombra o efecto con canvas si lo deseas
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.4, 0.6, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10, ]
+
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+        canvas.before:
+            Color:
+                rgba: 0.95, 0.95, 0.95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: "Selecciona una Categoría de Trivia"
+            font_size: '30sp'
+            color: 0.1, 0.1, 0.1, 1
+        CustomButton:
+            text: "Cultura General"
+            on_release: root.select_category("cultura_general")
+        CustomButton:
+            text: "Ciencia"
+            on_release: root.select_category("ciencia")
+        CustomButton:
+            text: "Deportes"
+            on_release: root.select_category("deportes")
+
+<TriviaScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            id: question_label
+            text: root.question_text
+            font_size: '28sp'
+            color: 0.2, 0.2, 0.2, 1
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 10
+            CustomButton:
+                text: root.option1
+                on_release: root.check_answer(root.option1)
+            CustomButton:
+                text: root.option2
+                on_release: root.check_answer(root.option2)
+            CustomButton:
+                text: root.option3
+                on_release: root.check_answer(root.option3)
+            CustomButton:
+                text: root.option4
+                on_release: root.check_answer(root.option4)
+        CustomButton:
+            text: "Siguiente Trivia"
+            size_hint_y: None
+            height: '50dp'
+            on_release: root.load_question()
