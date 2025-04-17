@@ -7,7 +7,6 @@
     color: 1, 1, 1, 1                     # Texto blanco
     size_hint_y: None
     height: '50dp'
-    # Agrega una sombra o efecto con canvas si lo deseas
     canvas.before:
         Color:
             rgba: 0.1, 0.4, 0.6, 1
@@ -52,11 +51,42 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
+
+        # 🧡 Mostrar vidas con íconos
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '32dp'
+            spacing: 5
+            Image:
+                source: root.lives_status[0] if len(root.lives_status) > 0 else ''
+                size_hint: None, None
+                size: '32dp', '32dp'
+            Image:
+                source: root.lives_status[1] if len(root.lives_status) > 1 else ''
+                size_hint: None, None
+                size: '32dp', '32dp'
+            Image:
+                source: root.lives_status[2] if len(root.lives_status) > 2 else ''
+                size_hint: None, None
+                size: '32dp', '32dp'
+
+        # 🎯 Score
+        Label:
+            text: root.score_text
+            font_size: '18sp'
+            color: 0.2, 0.2, 0.2, 1
+            size_hint_y: None
+            height: '30dp'
+
+        # ❓ Pregunta
         Label:
             id: question_label
             text: root.question_text
             font_size: '28sp'
             color: 0.2, 0.2, 0.2, 1
+
+        # 🔘 Opciones
         BoxLayout:
             orientation: 'vertical'
             spacing: 10
@@ -72,6 +102,8 @@
             CustomButton:
                 text: root.option4
                 on_release: root.check_answer(root.option4)
+
+        # 🔁 Botón siguiente
         CustomButton:
             text: "Siguiente Trivia"
             size_hint_y: None

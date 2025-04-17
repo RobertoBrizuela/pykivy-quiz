@@ -34,3 +34,61 @@ Before running the application, ensure you have Python 3.6+ installed. Follow th
    ```bash
    git clone https://github.com/yourusername/random-trivia-app.git
    cd random-trivia-app
+
+2. **Create and Activate a Virtual Environment:**
+
+        python -m venv venv
+        venv\Scripts\activate   # On Windows
+        # source venv/bin/activate  # On Unix or macOS
+
+3. **Install Dependencies:**
+        
+        pip install -r requirements.txt
+
+*(Optional) Install Buildozer for Android Packaging:*
+
+        pip install buildozer
+
+
+**Usage**
+
+To run the Random Trivia App locally on your machine:
+
+        python main.py
+
+Once the app launches, you will be presented with a screen to select a trivia category. After making a selection, you can start answering trivia questions. Use the "Next Trivia" button to load a new question.
+
+
+**Project Structure**
+
+The project follows a modular structure:
+
+random-trivia-app/
+├── assets/                 # Images, fonts, and other resources
+│   └── design.kv           # Kivy language file for UI definitions
+├── models/                 # Logic for trivia questions and data
+│   └── trivia_model.py     # Trivia data and functions
+├── screens/                # Kivy screens for different views
+│   ├── home.py             # Home screen: category selection
+│   └── trivia.py           # Trivia screen: questions & answers
+├── venv/                   # Virtual environment directory (ignored in Git)
+├── .gitignore              # Git ignore file
+├── main.py                 # Main entry point for the application
+└── README.md               # This file
+
+
+**Contributing**
+
+Contributions are welcome! If you would like to improve the app, add new features, or fix bugs, feel free to fork the repository and submit a pull request. Please follow the project's coding standards and include documentation when necessary.
+
+**License**
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+**Acknowledgements**
+
+Kivy – for providing a robust framework for cross-platform UI development.
+
+The open-source community for various tutorials and examples that helped shape this project.
+
+Buildozer – for the Android packaging process.
