@@ -2,7 +2,7 @@
 import random
 
 # Ejemplo de preguntas organizadas por categorías
-TRIVIA_DATA = {
+datastore = {
     "cultura_general": [
         {
             "question": "¿Quién escribió 'Don Quijote de la Mancha'?",
@@ -41,8 +41,28 @@ TRIVIA_DATA = {
     ]
 }
 
-def get_trivia_question(category):
-    data = TRIVIA_DATA.get(category, [])
-    if not data:
-        return None
-    return random.choice(data)
+class TriviaModel:
+    
+    # Clase para manejar el flujo de preguntas por categoría.
+    # Mantiene un pool de preguntas interno y admite reinicio.
+    
+    def __init__(self, category: str):
+        self.category = category
+        self._original_pool = datastore.get(category, [])
+        self.reset()
+
+    def get_next_question(self) -> dict or None:
+        
+        # Devuelve la siguiente pregunta (con opciones y respuesta)
+        # o None si no quedan preguntas.
+        
+        if not self._pool:
+            return None
+        return self._pool.pop()
+
+    def reset(self) -> None:
+        
+        # Reinicia el pool de preguntas a su estado original y baraja.
+        
+        self._pool = self._original_pool.copy()
+        random.shuffle(self._pool)
