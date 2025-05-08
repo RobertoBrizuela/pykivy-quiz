@@ -14,6 +14,13 @@ from models.trivia_model import TriviaModel
 
 Builder.load_string('''
 <TriviaScreen>:
+    canvas.before:
+        Color:
+            rgba: 0.95, 0.95, 0.95, 1  # Fondo claro
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
     BoxLayout:
         orientation: 'vertical'
         padding: 20
@@ -23,6 +30,7 @@ Builder.load_string('''
         Label:
             text: root.score_text
             font_size: '18sp'
+            color: 0, 0, 0, 1 # Cambia el texto a negro
             size_hint_y: None
             height: '30dp'
 
@@ -34,14 +42,17 @@ Builder.load_string('''
             spacing: 5
             Image:
                 source: root.lives_status[0] if len(root.lives_status) > 0 else ''
+                color: 1,1,1,1
                 size_hint: None, None
                 size: '32dp', '32dp'
             Image:
                 source: root.lives_status[1] if len(root.lives_status) > 1 else ''
+                color: 1,1,1,1
                 size_hint: None, None
                 size: '32dp', '32dp'
             Image:
                 source: root.lives_status[2] if len(root.lives_status) > 2 else ''
+                color: 1,1,1,1
                 size_hint: None, None
                 size: '32dp', '32dp'
 
@@ -50,6 +61,7 @@ Builder.load_string('''
             id: question_label
             text: root.question_text
             font_size: 28
+            color: 0, 0, 0, 1 # Cambia el texto a negro 
             size_hint_y: None
             height: '60dp'
 
@@ -77,16 +89,8 @@ Builder.load_string('''
                 text: root.option4
                 background_color: 1,1,1,1
                 on_release: root.check_answer(self.text, self)
-
-        # Botón “Siguiente Trivia”
-        Button:
-            id: next_btn
-            text: "Siguiente Trivia"
-            size_hint_y: None
-            height: '50dp'
-            disabled: not root.question_answered
-            on_release: root.load_question()
 ''')
+
 
 class TriviaScreen(Screen):
     # Texto en pantalla
